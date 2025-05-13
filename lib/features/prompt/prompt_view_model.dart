@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
-//import '../../services/firestore.dart';
+import '../../services/firestore.dart';
 import '../placeTourist/place_tourist_model.dart';
 import 'prompt_model.dart';
 
@@ -36,9 +36,6 @@ class PromptViewModel extends ChangeNotifier {
     _selectedDate = date;
     notifyListeners();  
   }
-
-  // For bookmarking functionality
-  Map<String, Map<String, dynamic>> bookmarks = {};
 
   void notify() => notifyListeners();
 
@@ -108,7 +105,8 @@ Use this exact structure:
 }
   
 uniqueId should be unique and of type String. 
-placeTouristTitle, placeTourist, dateTourist, floodRisk, floodRiskExplanation, earthquakeRisk, earthquakeRiskExplanation, conclusion and conclusionExplanation  should be of String type. 
+placeTouristTitle, placeTourist, dateTourist, floodRisk, floodRiskExplanation, earthquakeRisk, earthquakeRiskExplanation, conclusion and conclusionExplanation should be of String type.
+dateTourist should not contain the time portion. 
 travelTip should be of type List<String>.
 
 i want to know about
@@ -126,39 +124,26 @@ Travel Tips:
 ''';
   }
 
-  void saveplaceTourist() {
-    //FirestoreService.saveplaceTourist(placeTourist!);
-  }
-
-  // Bookmark methods
-  bool isBookmarked(String placeId) {
-    return bookmarks.containsKey(placeId);
-  }
-
-  void toggleBookmark() {
-    if (placeTourist == null) return;
-
-    final placeId = placeTourist!.id;
-    if (isBookmarked(placeId)) {
-      bookmarks.remove(placeId);
+  Future<bool> isBookmarked() async {
+    bool result = await FirestoreService.isBookmarked(placeTourist!);
+  
+    if (result) {
+    return true;
     } else {
-      bookmarks[placeId] = {
-        'prompt': promptTextController.text,
-        'placeTourist': placeTourist!.toJson(),
-        'date': selectedDate.toString(),
-      };
+      return false;
     }
+  }
+
+  void toggleBookmark() async {
+    if (await isBookmarked()) {
+      await FirestoreService.deletePlace(placeTourist!);
+    } else {
+      await FirestoreService.savePlace(placeTourist!);
+    }
+
     notifyListeners();
   }
 
-  void loadBookmark(String placeId) {
-    if (bookmarks.containsKey(placeId)) {
-      final bookmark = bookmarks[placeId]!;
-      promptTextController.text = bookmark['prompt'] ?? '';
-      placeTourist = PlaceTourist.fromJson(bookmark['placeTourist']);
-      notifyListeners();
-    }
-  }
 }
   
 

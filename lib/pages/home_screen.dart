@@ -101,6 +101,7 @@ class HomeScreen extends StatelessWidget {
                                                 lastDate: DateTime(2100),
                                               );
                                               if (selectedDate != null) {
+                                                
                                                 viewModel.selectedDate = selectedDate;
                                                 viewModel.notify();
                                               }
@@ -186,7 +187,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header with bookmark button
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -195,17 +196,33 @@ class HomeScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 IconButton(
-                  icon: Icon(viewModel.isBookmarked(placeId)? Icons.bookmark: Icons.bookmark_border,
-                  color: Color(0x7FFFB703),
-                  size: 46),
+                  icon: FutureBuilder<bool>(
+                    future: viewModel.isBookmarked(), 
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator(); 
+                      } else if (snapshot.hasError) {
+                        print("Error in snapshot: ${snapshot.error}"); 
+                        return Icon(Icons.error, color: Colors.red); 
+                      } else if (snapshot.hasData) {
+                        bool isBookmarked = snapshot.data!; 
+                        return Icon(
+                          isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                          color: Colors.black,
+                          size: 24,
+                        );
+                      } else {
+                        return Icon(Icons.bookmark_border, color: const Color(0x7FFFB703), size: 24); 
+                      }
+                    },
+                  ),
                   onPressed: viewModel.toggleBookmark,
-                ),
+                )
               ],
             ),
             const Divider(),
-            // Place tourist details
             _buildDetailRow('Location', place.placeTourist),
-            _buildDetailRow('Date', place.dateTourist.toString()),
+             _buildDetailRow('Date', DateFormat('yyyy-MM-dd').format(place.dateTourist)),
             _buildDetailRow('Flood Risk', place.floodRisk),
             _buildDetailRow('Flood Risk Explanation', place.floodRiskExplanation),
             _buildDetailRow('Earthquake Risk', place.earthquakeRisk),
@@ -234,10 +251,9 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: RichText(
         text: TextSpan(
-          //style: DefaultTextStyle.of(context).style,
           children: [
             TextSpan(
-              text: '$label: ',
+              text: '$label: \n',
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             TextSpan(text: value),

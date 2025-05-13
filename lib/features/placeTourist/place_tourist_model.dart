@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:gaigai/util/json_parsing.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 class PlaceTourist {
@@ -77,16 +78,13 @@ factory PlaceTourist.fromGeneratedContent(GenerateContentResponse content) {
   assert(content.text != null);
   
   try {
-    // Clean and parse the JSON
     final validJson = cleanJson(content.text!);
     final dynamic decodedJson = jsonDecode(validJson);
 
-    // Handle case where the response might be a List
     final Map<String, dynamic> jsonMap = decodedJson is List 
         ? decodedJson.first as Map<String, dynamic> 
         : decodedJson as Map<String, dynamic>;
 
-    // Safe parsing with null checks
     return PlaceTourist(
       id: jsonMap['id']?.toString() ?? '',
       title: jsonMap['title']?.toString() ?? '',
@@ -111,11 +109,12 @@ static DateTime _parseDate(String? dateString) {
     return DateTime.now();
   }
 
+  dateString = dateString.trim().split(' ').first;
+
   try {
-    // First try parsing directly as ISO format
     return DateTime.parse(dateString);
   } catch (_) {
-    // If ISO format fails, try common patterns manually
+    
     final patterns = [
       'yyyy-MM-dd',  // ISO-like
       'MM/dd/yyyy',  // US format
@@ -130,57 +129,53 @@ static DateTime _parseDate(String? dateString) {
       } catch (_) {}
     }
 
-    // If all else fails, return current date
     return DateTime.now();
   }
 }
 
   Map<String, Object?> toFirestore() {
-    return {
-          'id': id,
-          'title': title,
-          'placeTourist': placeTourist,
-          'dateTourist': dateTourist,
-          'floodRisk': floodRisk,
-          'floodRiskExplanation': floodRiskExplanation,
-          'earthquakeRisk': earthquakeRisk,
-          'earthquakeRiskExplanation': earthquakeRiskExplanation,
-          'conclusion': conclusion,
-          'conclusionExplanation': conclusionExplanation,
-         ' travelTips': travelTips,
-    };
-  }
+  return {
+    'id': id,
+    'title': title,
+    'placeTourist': placeTourist,
+    'dateTourist': DateFormat('yyyy-MM-dd').format(dateTourist), 
+    'floodRisk': floodRisk,
+    'floodRiskExplanation': floodRiskExplanation,
+    'earthquakeRisk': earthquakeRisk,
+    'earthquakeRiskExplanation': earthquakeRiskExplanation,
+    'conclusion': conclusion,
+    'conclusionExplanation': conclusionExplanation,
+    'travelTips': travelTips, 
+  };
+}
 
-  factory PlaceTourist.fromFirestore(Map<String, Object?> data) {
-    if (data
-        case {
-          "id": String id,
-          "title": String title,
-          "placeTourist" : String placeTourist,
-          "dateTourist": DateTime dateTourist,
-          "floodRisk": String floodRisk,
-          "floodRiskExplanation": String floodRiskExplanation,
-          "earthquakeRisk": String earthquakeRisk,
-          "earthquakeRiskExplanation": String earthquakeRiskExplanation,
-          "conclusion": String conclusion,
-          "conclusionExplanation": String conclusionExplanation,
-          "travelTips":List<String> travelTips,
-        }) {
-      return PlaceTourist(
-          id: id,
-          title: title,
-          placeTourist: placeTourist,
-          dateTourist: dateTourist,
-          floodRisk: floodRisk,
-          floodRiskExplanation: floodRiskExplanation,
-          earthquakeRisk: earthquakeRisk,
-          earthquakeRiskExplanation: earthquakeRiskExplanation,
-          conclusion: conclusion,
-          conclusionExplanation: conclusionExplanation,
-          travelTips: travelTips.map((i) => i.toString()).toList(),
-      );
-    }
+factory PlaceTourist.fromFirestore(Map<String, dynamic> data) {
+   try {
+    DateTime dateTourist;
+    
+    final dateString = data['dateTourist'] as String;
+    final date = DateFormat('yyyy-MM-dd').parse(dateString);
 
-    throw "Malformed Firestore data";
+    final travelTips = (data['travelTips'] as List<dynamic>?)
+        ?.map((item) => item.toString())
+        .toList() ?? [];
+
+    return PlaceTourist(
+      id: data['id'] as String,
+      title: data['title'] as String,
+      placeTourist: data['placeTourist'] as String,
+      dateTourist: date,
+      floodRisk: data['floodRisk'] as String,
+      floodRiskExplanation: data['floodRiskExplanation'] as String,
+      earthquakeRisk: data['earthquakeRisk'] as String,
+      earthquakeRiskExplanation: data['earthquakeRiskExplanation'] as String,
+      conclusion: data['conclusion'] as String,
+      conclusionExplanation: data['conclusionExplanation'] as String,
+      travelTips: travelTips,
+    );
+  } catch (e) {
+    throw FormatException('Malformed Firestore data: ${e.toString()}');
   }
+}
+
 }

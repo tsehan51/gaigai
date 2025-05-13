@@ -9,6 +9,10 @@ import 'package:gaigai/util/device_info.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'firebase_options.dart';
 
 import 'features/prompt/prompt_view_model.dart';
 import 'features/placeTourist/place_tourist_view_model.dart';
@@ -17,6 +21,14 @@ late BaseDeviceInfo deviceInfo;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  
+  FirebaseFirestore.instance.settings = const Settings(
+    persistenceEnabled: true,      
+    cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED, 
+  );
 
   deviceInfo = await DeviceInfo.initialize(DeviceInfoPlugin());
 
