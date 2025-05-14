@@ -17,8 +17,9 @@ class PlaceTourist {
     required this.earthquakeRiskExplanation, 
     required this.conclusion, 
     required this.conclusionExplanation, 
-    required this.travelTips, 
-   
+    required this.travelTips,
+    required this.scamRiskLevel,
+    required this.scamTypes,
   });
 
   final String id;
@@ -32,6 +33,8 @@ class PlaceTourist {
   final String conclusion;
   final String conclusionExplanation;
   final List<String> travelTips;
+  final String scamRiskLevel;
+  final String scamTypes;
 
 factory PlaceTourist.fromJson(Map<String, dynamic> json) {
   
@@ -55,6 +58,8 @@ factory PlaceTourist.fromJson(Map<String, dynamic> json) {
     conclusion: json['conclusion'] as String,
     conclusionExplanation: json['conclusionExplanation'] as String,
     travelTips: travelTips,
+    scamRiskLevel: json['scamRiskLevel'] as String,
+    scamTypes: json['scamTypes'] as String,
   );
 }
 
@@ -71,6 +76,8 @@ Map<String, dynamic> toJson() {
           'conclusion': conclusion,
           'conclusionExplanation': conclusionExplanation,
          ' travelTips': travelTips,
+          'scamRiskLevel': scamRiskLevel,
+          'scamTypes': scamTypes,
   };
 }
 
@@ -97,6 +104,8 @@ factory PlaceTourist.fromGeneratedContent(GenerateContentResponse content) {
       conclusion: jsonMap['conclusion']?.toString() ?? '',
       conclusionExplanation: jsonMap['conclusionExplanation']?.toString() ?? '',
       travelTips: (jsonMap['travelTips'] as List?)?.map((e) => e.toString()).toList() ?? [],
+      scamRiskLevel: jsonMap['scamRiskLevel']?.toString() ?? '',
+      scamTypes: jsonMap['scamTypes']?.toString() ?? '',
     );
   } catch (e) {
 
@@ -145,7 +154,9 @@ static DateTime _parseDate(String? dateString) {
     'earthquakeRiskExplanation': earthquakeRiskExplanation,
     'conclusion': conclusion,
     'conclusionExplanation': conclusionExplanation,
-    'travelTips': travelTips, 
+    'travelTips': travelTips,
+    'scamRiskLevel': scamRiskLevel,
+    'scamTypes': scamTypes,
   };
 }
 
@@ -172,6 +183,8 @@ factory PlaceTourist.fromFirestore(Map<String, dynamic> data) {
       conclusion: data['conclusion'] as String,
       conclusionExplanation: data['conclusionExplanation'] as String,
       travelTips: travelTips,
+      scamRiskLevel: data['scamRiskLevel'] as String,
+      scamTypes: data['scamTypes'] as String,
     );
   } catch (e) {
     throw FormatException('Malformed Firestore data: ${e.toString()}');
