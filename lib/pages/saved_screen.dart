@@ -227,6 +227,8 @@ Widget _buildPlaceTouristCard(BuildContext context, PlaceTouristViewModel viewMo
                       _buildDetailRow('Flood Risk Explanation', place.floodRiskExplanation),
                       _buildDetailRow('Earthquake Risk', place.earthquakeRisk),
                       _buildDetailRow('Earthquake Risk Explanation', place.earthquakeRiskExplanation),
+                      _buildDetailRow('Scam Risk Level', place.scamRiskLevel),
+                      _buildDetailRow('Scam Types', place.scamTypes),
                       _buildDetailRow('Conclusion', place.conclusion),
                       _buildDetailRow('Conclusion Explanation', place.conclusionExplanation),
                       if (place.travelTips.isNotEmpty) ...[

@@ -99,13 +99,15 @@ Use this exact structure:
   "floodRiskExplanation": \$floodRiskExplanation,
   "earthquakeRisk": \$earthquakeRisk,
   "earthquakeRiskExplanation": \$earthquakeRiskExplanation,
+  "scamRiskLevel": \$scamRiskLevel,
+  "scamTypes": \$scamTypes,
   "conclusion": \$conclusion,
   "conclusionExplanation": \$conclusionExplanation,
   "travelTips":\$travelTips,
 }
   
 uniqueId should be unique and of type String. 
-placeTouristTitle, placeTourist, dateTourist, floodRisk, floodRiskExplanation, earthquakeRisk, earthquakeRiskExplanation, conclusion and conclusionExplanation should be of String type.
+placeTouristTitle, placeTourist, dateTourist, floodRisk, floodRiskExplanation, earthquakeRisk, earthquakeRiskExplanation, scamRiskLevel, scamTypes, conclusion and conclusionExplanation should be of String type.
 dateTourist should not contain the time portion. 
 travelTip should be of type List<String>.
 
@@ -113,6 +115,8 @@ i want to know about
 risk of flood on ${selectedDate}: very high, high, moderate, low or very low and explanation
 risk of earthquake on ${selectedDate}: very high, high, moderate, low or very low and explanation
 Should tourist visit on ${selectedDate}: yes or no and explanation
+scamRiskLevel must be one of: "Low Risk", "Medium Risk", "High Risk"  
+scamTypes should be a comma-separated list of scam types (e.g., fake taxis, overpricing, pickpocketing)
 
 if tourist should not visit ${promptTextController}  on ${selectedDate} then,
 alternative date the tourist can visit${promptTextController} :
