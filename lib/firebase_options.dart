@@ -72,7 +72,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '470203659026',
     projectId: 'gaigai-apac-solution-challenge',
     storageBucket: 'gaigai-apac-solution-challenge.firebasestorage.app',
-    iosBu   ndleId: 'com.example.gaigai',
+    iosBundleId: 'com.example.gaigai',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
