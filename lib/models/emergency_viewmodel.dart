@@ -8,12 +8,20 @@ class EmergencyViewModel extends ChangeNotifier {
   String? _emergencyMessage;
   int _checkInIntervalSeconds = 5; // Default to 5 seconds for testing
   Timer? _checkTimer;
+  bool _autoStartEnabled = false;
+  bool _emergencyAlertsEnabled = true;
+  bool _locationSharingEnabled = true;
+  bool _travelAlertsEnabled = true;
 
   bool get isActive => _isActive;
   DateTime? get lastCheckIn => _lastCheckIn;
   DateTime? get emergencyTriggeredAt => _emergencyTriggeredAt;
   String? get emergencyMessage => _emergencyMessage;
   int get checkInIntervalSeconds => _checkInIntervalSeconds;
+  bool get autoStartEnabled => _autoStartEnabled;
+  bool get emergencyAlertsEnabled => _emergencyAlertsEnabled;
+  bool get locationSharingEnabled => _locationSharingEnabled;
+  bool get travelAlertsEnabled => _travelAlertsEnabled;
 
   void setCheckInInterval(int seconds) {
     if (seconds >= 5) { // Minimum 5 seconds
@@ -63,10 +71,40 @@ class EmergencyViewModel extends ChangeNotifier {
       final difference = now.difference(_lastCheckIn!);
       if (difference.inSeconds >= _checkInIntervalSeconds) {
         _emergencyTriggeredAt = now;
-        _emergencyMessage = "I have reported to police with your location: 123 Main St, City";
+        if (_emergencyAlertsEnabled) {
+          String message = _locationSharingEnabled 
+              ? "I have reported to police and emergency contact with your location: 123 Main St, City"
+              : "Emergency alert sent without location sharing";
+          if (_travelAlertsEnabled) {
+            message += "\nTravel safety alerts are enabled for your destination";
+          }
+          _emergencyMessage = message;
+        } else {
+          _emergencyMessage = "Emergency check-in missed";
+        }
         notifyListeners();
       }
     }
+  }
+
+  void toggleAutoStart(bool value) {
+    _autoStartEnabled = value;
+    notifyListeners();
+  }
+
+  void toggleEmergencyAlerts(bool value) {
+    _emergencyAlertsEnabled = value;
+    notifyListeners();
+  }
+
+  void toggleLocationSharing(bool value) {
+    _locationSharingEnabled = value;
+    notifyListeners();
+  }
+
+  void toggleTravelAlerts(bool value) {
+    _travelAlertsEnabled = value;
+    notifyListeners();
   }
 
   @override
