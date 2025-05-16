@@ -1,1 +1,39 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"gaigai-b4b88","appId":"1:255550956107:android:281920c657bbaac69be3ce","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"gaigai-b4b88","configurations":{"android":"1:255550956107:android:281920c657bbaac69be3ce","ios":"1:255550956107:ios:31a83fcee2417d889be3ce","macos":"1:255550956107:ios:31a83fcee2417d889be3ce","web":"1:255550956107:web:c58913332046558d9be3ce","windows":"1:255550956107:web:d45d275b894482f79be3ce"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "gaigai-apac-solution-challenge",
+          "appId": "1:470203659026:android:ad1bb3b8ec41053fde39cb",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "gaigai-apac-solution-challenge",
+          "configurations": {
+            "android": "1:470203659026:android:ad1bb3b8ec41053fde39cb",
+            "ios": "1:470203659026:ios:af43384ef346cb06de39cb",
+            "macos": "1:470203659026:ios:af43384ef346cb06de39cb",
+            "web": "1:470203659026:web:de2d42ffc68184a1de39cb",
+            "windows": "1:470203659026:web:9f533bdcbc5fe174de39cb"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

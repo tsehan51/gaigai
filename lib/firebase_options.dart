@@ -41,47 +41,47 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAvefq_HEXtSrYxtp-XCxYSlfw-u0ESXNY',
-    appId: '1:255550956107:web:c58913332046558d9be3ce',
-    messagingSenderId: '255550956107',
-    projectId: 'gaigai-b4b88',
-    authDomain: 'gaigai-b4b88.firebaseapp.com',
-    storageBucket: 'gaigai-b4b88.firebasestorage.app',
+    apiKey: 'AIzaSyBotWFXuaJCugD16OIS-49Q5xSOaLKy7wc',
+    appId: '1:470203659026:web:de2d42ffc68184a1de39cb',
+    messagingSenderId: '470203659026',
+    projectId: 'gaigai-apac-solution-challenge',
+    authDomain: 'gaigai-apac-solution-challenge.firebaseapp.com',
+    storageBucket: 'gaigai-apac-solution-challenge.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCY-DB0EJwvqG04bDwrW436kwK7PSCfcLw',
-    appId: '1:255550956107:android:281920c657bbaac69be3ce',
-    messagingSenderId: '255550956107',
-    projectId: 'gaigai-b4b88',
-    storageBucket: 'gaigai-b4b88.firebasestorage.app',
+    apiKey: 'AIzaSyDO1_C8_NVmf-KAlg73v-uE_xSIo7CGPoA',
+    appId: '1:470203659026:android:ad1bb3b8ec41053fde39cb',
+    messagingSenderId: '470203659026',
+    projectId: 'gaigai-apac-solution-challenge',
+    storageBucket: 'gaigai-apac-solution-challenge.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDONziPOcJW_trVjBW0CrsNbjy75JtL1qg',
-    appId: '1:255550956107:ios:31a83fcee2417d889be3ce',
-    messagingSenderId: '255550956107',
-    projectId: 'gaigai-b4b88',
-    storageBucket: 'gaigai-b4b88.firebasestorage.app',
+    apiKey: 'AIzaSyBqdF3hIHVE8qwvAIjmrqRYEc3KhfIae38',
+    appId: '1:470203659026:ios:af43384ef346cb06de39cb',
+    messagingSenderId: '470203659026',
+    projectId: 'gaigai-apac-solution-challenge',
+    storageBucket: 'gaigai-apac-solution-challenge.firebasestorage.app',
     iosBundleId: 'com.example.gaigai',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDONziPOcJW_trVjBW0CrsNbjy75JtL1qg',
-    appId: '1:255550956107:ios:31a83fcee2417d889be3ce',
-    messagingSenderId: '255550956107',
-    projectId: 'gaigai-b4b88',
-    storageBucket: 'gaigai-b4b88.firebasestorage.app',
-    iosBundleId: 'com.example.gaigai',
+    apiKey: 'AIzaSyBqdF3hIHVE8qwvAIjmrqRYEc3KhfIae38',
+    appId: '1:470203659026:ios:af43384ef346cb06de39cb',
+    messagingSenderId: '470203659026',
+    projectId: 'gaigai-apac-solution-challenge',
+    storageBucket: 'gaigai-apac-solution-challenge.firebasestorage.app',
+    iosBu   ndleId: 'com.example.gaigai',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyAvefq_HEXtSrYxtp-XCxYSlfw-u0ESXNY',
-    appId: '1:255550956107:web:d45d275b894482f79be3ce',
-    messagingSenderId: '255550956107',
-    projectId: 'gaigai-b4b88',
-    authDomain: 'gaigai-b4b88.firebaseapp.com',
-    storageBucket: 'gaigai-b4b88.firebasestorage.app',
+    apiKey: 'AIzaSyBotWFXuaJCugD16OIS-49Q5xSOaLKy7wc',
+    appId: '1:470203659026:web:9f533bdcbc5fe174de39cb',
+    messagingSenderId: '470203659026',
+    projectId: 'gaigai-apac-solution-challenge',
+    authDomain: 'gaigai-apac-solution-challenge.firebaseapp.com',
+    storageBucket: 'gaigai-apac-solution-challenge.firebasestorage.app',
   );
 
 }
