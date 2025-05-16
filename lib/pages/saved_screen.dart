@@ -109,11 +109,17 @@ class _BuildSavedCard extends StatefulWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          widget.placeTourist.title,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                        Expanded(
+                          child: RichText(
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 3,
+                            text: TextSpan(
+                              text: widget.placeTourist.title,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
                           ),
                         ),
                         GestureDetector(
@@ -166,10 +172,16 @@ Widget _buildPlaceTouristCard(BuildContext context, PlaceTouristViewModel viewMo
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            place.title,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
+                          Expanded(
+                            child: RichText(
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
+                              text: TextSpan(
+                                text: place.title,
+                                style: Theme.of(context).textTheme.titleMedium,
+                                ),
+                              ),
+                            ),
                           Row(
                             children: [
                               StatefulBuilder(
@@ -255,9 +267,9 @@ Widget _buildPlaceTouristCard(BuildContext context, PlaceTouristViewModel viewMo
           children: [
             TextSpan(
               text: '$label: \n',
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
             ),
-            TextSpan(text: value),
+              TextSpan(text: value, style: const TextStyle(color: Colors.black87, fontSize: 14, height: 1.4, letterSpacing: 0.2,)),
           ],
         ),
       ),

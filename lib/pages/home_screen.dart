@@ -90,7 +90,6 @@ class HomeScreen extends StatelessWidget {
                                             TextFormField(
                                             readOnly: true,
                                             decoration: InputDecoration(
-                                              hintText: 'Select date',
                                               border: OutlineInputBorder(borderSide: BorderSide.none),
                                               suffixIcon: Icon(Icons.calendar_today),
                                             ),
@@ -257,7 +256,7 @@ class HomeScreen extends StatelessWidget {
               text: '$label: \n',
               style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black,),
             ),
-            TextSpan(text: value, style: const TextStyle(color: Colors.black)),
+            TextSpan(text: value, style: const TextStyle(color: Colors.black87, fontSize: 14, height: 1.4, letterSpacing: 0.2,)),
           ],
         ),
       ),

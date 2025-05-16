@@ -60,10 +60,8 @@ class PromptViewModel extends ChangeNotifier {
     try {
       final model = textModel;
       final prompt = buildPrompt();
-      debugPrint(prompt.toString());
 
       final content = await GeminiService.generateContent(model, prompt);
-      debugPrint('Raw response: ${content.text}');
 
       if (content.text != null) {
         placeTourist = PlaceTourist.fromGeneratedContent(content);
@@ -112,15 +110,15 @@ dateTourist should not contain the time portion.
 travelTip should be of type List<String>.
 
 i want to know about
-risk of flood on $selectedDate: very high, high, moderate, low or very low and explanation
-risk of earthquake on $selectedDate: very high, high, moderate, low or very low and explanation
-Should tourist visit on $selectedDate: yes or no and explanation
+risk of flood on $selectedDate: Very High, High, Moderate, Low or Very Low and explanation
+risk of earthquake on $selectedDate: Very High, High, Moderate, Low or Very Low and explanation
+Should tourist visit on $selectedDate: Yes or No and explanation
 scamRiskLevel must be one of: "Low Risk", "Medium Risk", "High Risk"  
 scamTypes should be a comma-separated list of scam types (e.g., fake taxis, overpricing, pickpocketing)
 
 if tourist should not visit $promptTextController on $selectedDate then,
 alternative date the tourist can visit$promptTextController :
-alternative places you can visit in Japan are:
+alternative places you can visit in $promptTextController are:
 alternative place you can visit in the world are:
 
 If tourist should visit $promptTextController on $selectedDate then,
