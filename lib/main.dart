@@ -65,8 +65,7 @@ class _MyAppState extends State<MyApp> {
   late GenerativeModel geminiModel;
   @override
   void initState() {
-    const apiKey =
-        String.fromEnvironment('API_KEY', defaultValue: 'key not found');
+    const apiKey = 'AIzaSyAXz890tXxgth2r3q5QZoP97_ctSWM-Ba8';
     if (apiKey == 'key not found') {
       throw InvalidApiKey(
         'Key not found in environment. Please add an API key.',
