@@ -51,14 +51,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                 ),
-                SwitchListTile(
-                  title: const Text('Enable Safety Mode'),
-                  subtitle: const Text('Turn on to start safety monitoring'),
-                  value: viewModel.isActive,
-                  onChanged: (value) => viewModel.toggleSafetyMode(),
-                ),
                 if (viewModel.isActive) ...[
-                  const Divider(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                     child: Column(

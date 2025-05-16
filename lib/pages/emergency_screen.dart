@@ -93,21 +93,12 @@ class EmergencyScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Safety Mode',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Switch(
-                          value: viewModel.isActive,
-                          onChanged: (_) => viewModel.toggleSafetyMode(),
-                        ),
-                      ],
+                    const Text(
+                      'Safety Mode Status',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     if (viewModel.isActive) ...[
                       const SizedBox(height: 16),
