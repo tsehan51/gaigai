@@ -11,28 +11,46 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:logging/logging.dart';
 
 import 'firebase_options.dart';
 
 import 'features/prompt/prompt_view_model.dart';
 import 'features/placeTourist/place_tourist_view_model.dart';
+import 'models/emergency_viewmodel.dart';
 
 late BaseDeviceInfo deviceInfo;
+final _logger = Logger('MyApp');
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  
-  FirebaseFirestore.instance.settings = const Settings(
-    persistenceEnabled: true,      
-    cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED, 
-  );
+Future<void> main() async {
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    
+    // Enable frame scheduling
+    await Future.delayed(Duration.zero);
+    
+    // Initialize Firebase only if it hasn't been initialized
+    if (Firebase.apps.isEmpty) {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    }
 
-  deviceInfo = await DeviceInfo.initialize(DeviceInfoPlugin());
+    // Configure Firestore settings
+    FirebaseFirestore.instance.settings = const Settings(
+      persistenceEnabled: true,      
+      cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED, 
+    );
 
-  runApp(const MyApp());
+    // Initialize device info
+    deviceInfo = await DeviceInfo.initialize(DeviceInfoPlugin());
+
+    runApp(const MyApp());
+  } catch (e) {
+    _logger.severe('Error during initialization: $e');
+    // Still run the app even if Firebase fails
+    runApp(const MyApp());
+  }
 }
 
 class MyApp extends StatefulWidget {
@@ -87,6 +105,9 @@ class _MyAppState extends State<MyApp> {
           ),
           ChangeNotifierProvider(
             create: (_) => placeTouristViewModel,
+          ),
+          ChangeNotifierProvider(
+            create: (_) => EmergencyViewModel(),
           ),
         ],
         child: SafeArea(

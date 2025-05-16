@@ -60,10 +60,10 @@ class PromptViewModel extends ChangeNotifier {
     try {
       final model = textModel;
       final prompt = buildPrompt();
-      print(prompt);
+      debugPrint(prompt.toString());
 
       final content = await GeminiService.generateContent(model, prompt);
-      print('Raw response: ${content.text}');
+      debugPrint('Raw response: ${content.text}');
 
       if (content.text != null) {
         placeTourist = PlaceTourist.fromGeneratedContent(content);
@@ -73,7 +73,7 @@ class PromptViewModel extends ChangeNotifier {
     } catch (error) {
       geminiFailureResponse = 'Failed to reach Gemini. \n\n$error';
       if (kDebugMode) {
-        print(error);
+        debugPrint(error.toString());
       }
     } finally {
       loadingNewplaceTourist = false;
@@ -86,7 +86,7 @@ class PromptViewModel extends ChangeNotifier {
     return '''
 You are a disaster information expert and a travel safety advisor at the same time. You are able to provide information on the flood and earthquake risks for the location tourists plan to visit using the latest and reliable available data provided by the government of Japan and organizations which are responsible for giving warnings or information regarding the risks of floods or earthquakes worldwide. 
 
-Guide me based on the current risk and suggest whether it might be safe to travel to the ${promptTextController} on ${selectedDate} or i should reconsider.
+Guide me based on the current risk and suggest whether it might be safe to travel to the $promptTextController on $selectedDate or i should reconsider.
 
  Return your response ONLY in raw JSON format — no explanations, no markdown, and no extra text.
 Use this exact structure:
@@ -112,18 +112,18 @@ dateTourist should not contain the time portion.
 travelTip should be of type List<String>.
 
 i want to know about
-risk of flood on ${selectedDate}: very high, high, moderate, low or very low and explanation
-risk of earthquake on ${selectedDate}: very high, high, moderate, low or very low and explanation
-Should tourist visit on ${selectedDate}: yes or no and explanation
+risk of flood on $selectedDate: very high, high, moderate, low or very low and explanation
+risk of earthquake on $selectedDate: very high, high, moderate, low or very low and explanation
+Should tourist visit on $selectedDate: yes or no and explanation
 scamRiskLevel must be one of: "Low Risk", "Medium Risk", "High Risk"  
 scamTypes should be a comma-separated list of scam types (e.g., fake taxis, overpricing, pickpocketing)
 
-if tourist should not visit ${promptTextController}  on ${selectedDate} then,
-alternative date the tourist can visit${promptTextController} :
+if tourist should not visit $promptTextController on $selectedDate then,
+alternative date the tourist can visit$promptTextController :
 alternative places you can visit in Japan are:
 alternative place you can visit in the world are:
 
-If tourist should visit ${promptTextController} on ${selectedDate} then,
+If tourist should visit $promptTextController on $selectedDate then,
 Travel Tips:
 ''';
   }

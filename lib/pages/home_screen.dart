@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                               SizedBox(height: 216),
                               Center(
                                 child: Text(
-                                  'Where to? \nI’ll keep you safe.',
+                                  "Where to? \nI'll keep you safe.",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 24,
@@ -178,7 +178,6 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildPlaceTouristCard(BuildContext context, PromptViewModel viewModel) {
     final place = viewModel.placeTourist!;
-    final placeId = place.id;
 
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 16),
@@ -202,7 +201,7 @@ class HomeScreen extends StatelessWidget {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const CircularProgressIndicator(); 
                       } else if (snapshot.hasError) {
-                        print("Error in snapshot: ${snapshot.error}"); 
+                        debugPrint('Error in snapshot: ${snapshot.error}'); 
                         return Icon(Icons.error, color: Colors.red); 
                       } else if (snapshot.hasData) {
                         bool isBookmarked = snapshot.data!; 

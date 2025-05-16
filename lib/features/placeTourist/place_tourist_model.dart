@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:gaigai/util/json_parsing.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 class PlaceTourist {
@@ -162,8 +161,6 @@ static DateTime _parseDate(String? dateString) {
 
 factory PlaceTourist.fromFirestore(Map<String, dynamic> data) {
    try {
-    DateTime dateTourist;
-    
     final dateString = data['dateTourist'] as String;
     final date = DateFormat('yyyy-MM-dd').parse(dateString);
 

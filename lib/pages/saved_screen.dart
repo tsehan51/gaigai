@@ -1,14 +1,8 @@
 import 'package:gaigai/features/placeTourist/place_tourist_view_model.dart';
 import 'package:gaigai/features/placeTourist/place_tourist_model.dart';
-import 'package:gaigai/features/prompt/prompt_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:material_symbols_icons/symbols.dart';
 import 'package:provider/provider.dart';
-
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:gaigai/models/saved_place.dart';
 import 'package:intl/intl.dart';
-import 'dart:convert';
 
 class SavedScreen extends StatelessWidget {
   const SavedScreen({super.key});
@@ -187,7 +181,7 @@ Widget _buildPlaceTouristCard(BuildContext context, PlaceTouristViewModel viewMo
                                         if (snapshot.connectionState == ConnectionState.waiting) {
                                           return const CircularProgressIndicator(); 
                                         } else if (snapshot.hasError) {
-                                          print("Error in snapshot: ${snapshot.error}"); 
+                                          debugPrint('Error in snapshot: ${snapshot.error}'); 
                                           return Icon(Icons.error, color: Colors.red); 
                                         } else if (snapshot.hasData) {
                                           bool isBookmarked = snapshot.data!; 
