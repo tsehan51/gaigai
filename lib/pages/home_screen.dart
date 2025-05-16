@@ -189,9 +189,13 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  place.title,
-                  style: Theme.of(context).textTheme.titleMedium,
+                Expanded(
+                  child: Text(
+                    place.title,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                 ),
                 IconButton(
                   icon: FutureBuilder<bool>(
@@ -224,7 +228,7 @@ class HomeScreen extends StatelessWidget {
             _buildDetailRow('Flood Risk', place.floodRisk),
             _buildDetailRow('Flood Risk Explanation', place.floodRiskExplanation),
             _buildDetailRow('Earthquake Risk', place.earthquakeRisk),
-            _buildDetailRow('Eaarthquake Risk Explanation', place.earthquakeRiskExplanation),
+            _buildDetailRow('Earthquake Risk Explanation', place.earthquakeRiskExplanation),
             _buildDetailRow('Scam Risk Level', place.scamRiskLevel),
             _buildDetailRow('Scam Types', place.scamTypes),
             _buildDetailRow('Conclusion', place.conclusion),

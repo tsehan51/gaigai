@@ -118,6 +118,7 @@ class _BuildSavedCard extends StatefulWidget {
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
+                                color: Colors.black,
                               ),
                             ),
                           ),
