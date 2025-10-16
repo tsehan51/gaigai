@@ -1,16 +1,35 @@
-# gaigai
+# Project Overview
 
-A new Flutter project.
+**GaiGai** is developed under the theme of improving global travel safety and awareness. It is a mobile application designed to enhance traveler safety by providing **real-time local risk insights** and **personal safety monitoring** features. It aims to centralize access to critical safety information such as scam alerts, flood risks, and earthquake warnings. This helps the users to make informed decisions before and during their trips.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+# Inspiration & Design
 
-A few resources to get you started if this is your first Flutter project:
+Traveling abroad often comes with safety uncertainties, from local scams to unexpected natural disasters.  While platforms like _Sitata_, _GeoSure_, and _bSafe_ offer partial solutions, **GaiGai** integrates multiple safety aspects into a single and user-friendly platform.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Key design principles:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+-   Real-time, location-based safety insights
+    
+-   Fast access to emergency tools and resources
+    
+-   Integration with Google Gemini API for intelligent risk assessment
+
+## Core Features
+
+#### 🧭 Before Travel
+
+-   Destination Risk Overview: Displays scam, flood, and earthquake risks for destinations.
+    
+-   Alternative Suggestions: Recommends safer destinations when risk levels are high.
+    
+-   Safety Information by Location: Provides summarized travel advisories and safety tips.
+    
+
+#### 🚶 During Travel
+
+-   Safety Mode: Allows users to activate periodic check-ins for safety confirmation.
+    
+-   Emergency Contact Integration: One-tap access to pre-set emergency contacts when in distress.
+    
+-   Smart Alerts: Sends push notifications about nearby risks or safety warnings.
